@@ -25,7 +25,8 @@ pipeline {
              post {
   success {
         echo "Archiving the artifacts"
-        archiveArtifacts artifacts: '**/*.war', followSymlinks: false, onlyIfSuccessful: true
+        archiveArtifacts artifacts: 'target/*.war', followSymlinks: false, onlyIfSuccessful: true
+
         }
        }
     }

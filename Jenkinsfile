@@ -10,6 +10,7 @@ pipeline {
          stage('Compile') {
             steps {
                 echo 'Compiling the code'
+                sh 'mvn -f pom.xml clean compile'
             }
         }
          stage('Unit test') {

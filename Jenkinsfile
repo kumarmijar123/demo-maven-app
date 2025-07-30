@@ -20,8 +20,12 @@ pipeline {
         }
          stage('Build and package app') {
             steps {
-                echo 'Building artifact'
+                echo 'mvn -f pom.xml package'
             }
+             post {
+  success {
+        echo "Archiving the artifacts"
+        archiveArtifacts artifacts: '**/*.war', followSymlinks: false, onlyIfSuccessful: true
         }
          stage('Upload artifact') {
             steps {

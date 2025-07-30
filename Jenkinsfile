@@ -27,7 +27,8 @@ pipeline {
         echo "Archiving the artifacts"
         archiveArtifacts artifacts: '**/*.war', followSymlinks: false, onlyIfSuccessful: true
         }
-   }
+       }
+    }
          stage('Upload artifact') {
             steps {
                 echo 'uploading artifact'

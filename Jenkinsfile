@@ -13,11 +13,7 @@ pipeline {
                 sh 'mvn -f pom.xml clean compile'
             }
         }
-         stage('Unit test') {
-            steps {
-                echo ' Running unit test'
-            }
-        }
+      	
          stage('Build and package app') {
             steps {
                 echo 'mvn -f pom.xml package'
@@ -30,11 +26,7 @@ pipeline {
         }
        }
     }
-         stage('Upload artifact') {
-            steps {
-                echo 'uploading artifact'
-            }
-        }
+         	
          stage('Creating docker image') {
             steps {
                 echo 'creating image'

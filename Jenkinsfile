@@ -16,7 +16,7 @@ pipeline {
       	
          stage('Build and package app') {
             steps {
-                echo 'mvn -f pom.xml package'
+                sh 'mvn -f pom.xml package'
             }
              post {
   success {

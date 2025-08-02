@@ -30,6 +30,7 @@ pipeline {
          stage('Creating docker image') {
             steps {
                 echo 'creating image'
+                sh 'docker image build -t harbor.registry.local/mymavenapp:$BUILD_NUMBER'
             }
         }
          stage('scan docker image') {

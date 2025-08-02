@@ -45,7 +45,7 @@ pipeline {
          stage('Push docker image to registry') {
             steps {
                 echo 'Uploading image to registry'
-                withDockerRegistry([credentialsID: 'dockerregcred', url: ''])
+                withDockerRegistry([credentialsId: 'dockerregcred', url: ''])
                 sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
             }
         }

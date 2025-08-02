@@ -1,5 +1,8 @@
 pipeline {
    agent any
+   environment {
+   CONTAINER_REGISTRY_AND_REPO="harbor.registry.local/mymavenapp"
+}
 
      stages {
         stage('Checkout code') {
@@ -30,12 +33,13 @@ pipeline {
          stage('Creating docker image') {
             steps {
                 echo 'creating image'
-                sh 'docker image build -t harbor.registry.local/mymavenapp:$BUILD_NUMBER .'
+                sh 'docker image build -t $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER .'
             }
         }
          stage('scan docker image') {
             steps {
                 echo 'Scanning docker image'
+               sh 'trivy image --format json --output result.json $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
             }
         }
          stage('Push docker image to registry') {

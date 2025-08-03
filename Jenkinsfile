@@ -1,7 +1,7 @@
 pipeline {
    agent any
    environment {
-   CONTAINER_REGISTRY_AND_REPO="Kumarmijar3/mymavenapp"
+   CONTAINER_REGISTRY_AND_REPO="kumarmijar3/mymavenapp"
 }
 
      stages {
@@ -50,9 +50,11 @@ pipeline {
         }
          stage('Push docker image to registry') {
             steps {
+             scripts{
                 withDockerRegistry([credentialsId: 'dockerregcred', url: '']) {
                 sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
             }
+           }
         }
 }		
          stage('Deploy app to dev env') {

@@ -51,10 +51,11 @@ pipeline {
          stage('Push docker image to registry') {
             steps {
                 echo 'Uploading image to registry'
-                withDockerRegistry([credentialsId: 'dockerregcred', url: ''])
+                withDockerRegistry([credentialsId: 'dockerregcred', url: '']) {
                 sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
             }
         }
+}
          stage('Deploy app to dev env') {
             steps {
                 echo 'Deploying to dev env'

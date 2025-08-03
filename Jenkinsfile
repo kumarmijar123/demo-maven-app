@@ -13,9 +13,15 @@ pipeline {
          stage('Compile') {
             steps {
                 echo 'Compiling the code'
-                sh 'mvn -f pom.xml clean compile'
+                sh 'mvn -f pom.xml clean compile -D skiptest'
             }
         }
+        stage('Unittest') {
+          steps {
+             echo "Running unitest"
+             sh 'mvn -f pom.xml test'
+}
+}	
       	
          stage('Build and package app') {
             steps {
@@ -39,7 +45,7 @@ pipeline {
          stage('scan docker image') {
             steps {
                 echo 'Scanning docker image'
-               sh 'trivy image --format json --output result.json --scanners vuln --exit-code 1 --severity HIGH,CRITICAL --ignore-unfised $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
+               sh 'trivy image --format json --output result.json --scanners vuln --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
             }
         }
          stage('Push docker image to registry') {

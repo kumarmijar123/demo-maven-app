@@ -66,7 +66,7 @@ pipeline {
        stage('Deploy to prod env') {
           steps {
           timeout(time:1, unit:'DAYS') {
-          input message: "Are you sure want to approve prod. deployment?'
+          input message: 'Are you sure want to approve prod. deployment?'
           }
           echo "Deploying to prod. env"
           sh '''

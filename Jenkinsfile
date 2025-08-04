@@ -58,7 +58,7 @@ pipeline {
                 sh '''
                 docker container stop myapp-dev || true
                 docker container rm myapp-dev || true
-                docker container run -d --name myapp -p 8088:8080 $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER
+                docker container run -d --name myapp-dev -p 8088:8080 $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER
                 '''
             }
         }

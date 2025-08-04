@@ -5,11 +5,6 @@ pipeline {
 }
 
      stages {
-        stage('Checkout code') {
-            steps {
-                echo 'Cloning the repo'
-            }
-        }
          stage('Compile') {
             steps {
                 echo 'Compiling the code'
@@ -64,13 +59,13 @@ pipeline {
                 docker container stop myapp-dev || true
                 docker container rm myapp-dev || true
                 docker container run -d --name myapp -p 8088:8080 $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER
-'''
+                '''
             }
         }
 
        stage('Deploy to prod env') {
           steps {
-          timeout(time:1, unit:'DAYS'} {
+          timeout(time:1, unit:'DAYS') {
           echo "Deploying to prod. env"
           sh '''
           docker container stop myapp-prod || true
@@ -80,5 +75,6 @@ pipeline {
     }
 }
 
+}
 }
 }
